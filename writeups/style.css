@@ -2,8 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap');
 body {
     background: #222222;
-    overflow: hidden;
-    margin: 0; /* Agrega esto para asegurarte de que no haya espacios en blanco alrededor del cuerpo */
+    display: flex;
 }
 canvas {
     position: fixed;
@@ -25,24 +24,19 @@ canvas {
 }
 .conteiner-main {
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
+    justify-content: center; 
+    margin: 20vh 0 0 10vw;
     position: relative;
     z-index: 2;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .conteiner-main .linea1 {
-    width: 80%;
+    width: 100%;
     margin: 20px auto;
 }
 
 .conteiner-main .linea2 {
-    width: 43%;
+    width: 50%;
     margin: 20px auto;
 }
 
@@ -53,28 +47,30 @@ canvas {
     background-color: black;
     border-radius: 50%;
     border: 2px solid #fff;
-    margin: 20px auto; /* Ajusta el margen superior según sea necesario */
+    margin: 20px auto; 
 }
-
 .conteiner-main .imagen-profile img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
 }
-/* ... Estilos existentes para .square, .circle, .triangle ... */
-* {
-	margin: 0;
-	padding: 0;
-}
 
+.conteiner-column1 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: center;
+}
 .nombre a{
+    text-align: center;
 	color: #ffffff;
 	font-family: VT323;
 	text-decoration: none;
 	font-size: 50px;
 }
 .coment{
+    text-align: center;
 	color: #ffffff;
 	font-family: VT323;
 	text-decoration: none;
@@ -135,3 +131,32 @@ nav a{
 hr {
 	background-color: white;
   }
+
+.writeups {
+    padding-left: 80px;
+    z-index: 2;
+}
+.nav-der ul {
+    padding: 0;
+}
+
+.nav-der ul li {
+    display: flex;
+    list-style-type: none;
+}
+
+.nav-der a {
+    color: #ffff; /* Color de los enlaces de la barra de navegación de writeups */
+    font-size: 25px; 
+    font-family: VT323;
+}
+.nav-der p{
+    color: #fff;
+    font-family: Inconsolata;
+    font-size: 20px;
+}
+.imagenes{
+    padding-left: 30px;
+    width: 15%;
+    height: 15%;
+}
