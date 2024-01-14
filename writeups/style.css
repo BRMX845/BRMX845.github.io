@@ -135,6 +135,7 @@ hr {
 .writeups {
     padding-left: 80px;
     z-index: 2;
+    justify-content: center;
 }
 .nav-der ul {
     padding: 0;
@@ -143,6 +144,7 @@ hr {
 .nav-der ul li {
     display: flex;
     list-style-type: none;
+    align-items: center;
 }
 
 .nav-der a {
@@ -154,9 +156,57 @@ hr {
     color: #fff;
     font-family: Inconsolata;
     font-size: 20px;
+    text-align: left;
+    padding-right: 20px;
 }
-.imagenes{
-    padding-left: 30px;
-    width: 15%;
-    height: 15%;
+.nav-der img{
+    justify-content: end;
+    padding-left: 80px;
+}
+.imagen1{
+    width: 100px;
+    height: 100px;
+}
+.imagen2{
+    width: 120px;
+    height: 80px;
+}
+.imagen3{
+    width: 100px;
+    height: 80px;
+}
+.imagen4{
+    width: 90px;
+    height: 90px;
+}
+@media screen and (max-width: 768px) {
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+    .conteiner-main{
+        margin: 10vh 0 0 0vw;
+    }
+
+    .conteiner-main .linea2 {
+        width: 80%;
+    }
+
+    .writeups {
+        padding: 20px; /* Ajusta el relleno según sea necesario */
+    }
+
+    .nav-der img {
+        justify-content: center;
+        padding-left: 0;
+    }
+    .nav-der p{
+        font-size-adjust: 10px;
+    }
+
+    .imagen1, .imagen2, .imagen3, .imagen4 {
+        width: 50px;
+        height: 50px;
+    }
+
 }

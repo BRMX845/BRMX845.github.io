@@ -84,7 +84,7 @@ canvas {
 	list-style-type: none;
 	padding: 0;
 	display: flex;
-	justify-content: center;
+	justify-content: space-evenly;
 }
 #nav li{
 		font-family: Inconsolata;
@@ -97,7 +97,7 @@ canvas {
 		border-radius: 9999px;
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-evenly;
 		color: #ffff;
 		gap: 10px;
 		font-weight: bold;
