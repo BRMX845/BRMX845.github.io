@@ -3,8 +3,6 @@
 body {
     background: #222222;
     display: flex;
-    overflow: auto;
-    overflow-y: scroll;
 }
 canvas {
     position: fixed;
@@ -134,7 +132,7 @@ hr {
 	background-color: white;
   }
 
-.writeups {
+.htb {
     padding-left: 80px;
     z-index: 2;
     justify-content: center;
@@ -153,9 +151,6 @@ hr {
     color: #ffff; /* Color de los enlaces de la barra de navegación de writeups */
     font-size: 25px; 
     font-family: VT323;
-}
-.nav-der a:hover{
-    transform: scale(1.25);
 }
 .nav-der p{
     color: #fff;
@@ -188,10 +183,9 @@ hr {
     body {
         display: flex;
         flex-direction: column;
-        overflow: auto;
     }
     .conteiner-main{
-        margin: 20vh 0 0 0vw;
+        margin: 10vh 0 0 0vw;
     }
 
     .conteiner-main .linea2 {
@@ -199,9 +193,7 @@ hr {
     }
 
     .writeups {
-        padding: 20px;
-        margin-top: 199px;
-        
+        padding: 20px; /* Ajusta el relleno según sea necesario */
     }
 
     .nav-der img {

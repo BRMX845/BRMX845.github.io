@@ -6,7 +6,8 @@ const body = document.body;
 const particles = [];
 
 body.style.backgroundColor = "black";
-body.style.overflow = "hidden";
+canvas.style.width = "100%";
+canvas.style.height = "100vh";
 body.appendChild(canvas);
 
 let width = canvas.width = window.innerWidth;
@@ -79,9 +80,13 @@ function animate() {
 }
 
 function touches(e) {
+    if (e.type === "touchmove") {
+      e.preventDefault(); // Previene el scroll por defecto en móviles
+    }
     point.x = e.touches ? e.touches[0].clientX : e.clientX;
     point.y = e.touches ? e.touches[0].clientY : e.clientY;
-}
+  }
+  
 
 function setup() {
     for (let i = 0; i < max; i++) {
