@@ -139,6 +139,24 @@ hr {
     z-index: 2;
     justify-content: center;
 }
+.htb {
+    padding-left: 80px;
+    z-index: 2;
+    justify-content: center;
+}
+.nav-der{
+    width: 100%;
+    display: flex;
+}
+.nav-der-text{
+    width: 60%;
+}
+.nav-der-img{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
 .nav-der ul {
     padding: 0;
 }
@@ -169,18 +187,22 @@ hr {
     padding-left: 80px;
 }
 .imagen1{
+    margin-top: 20px;
     width: 100px;
     height: 100px;
 }
 .imagen2{
+    margin-top: 15px;
     width: 120px;
     height: 80px;
 }
 .imagen3{
+    margin-top: 20px;
     width: 100px;
     height: 80px;
 }
 .imagen4{
+    margin-top: 20px;
     width: 90px;
     height: 90px;
 }
@@ -212,9 +234,12 @@ hr {
         font-size-adjust: 10px;
     }
 
-    .imagen1, .imagen2, .imagen3, .imagen4 {
-        width: 50px;
-        height: 50px;
+    .imagen1, .imagen3, .imagen4 {
+        width: 100px;
+        height: 90px;
+    }
+    .imagen2{
+        margin-top: 35px;
     }
 
 }
