@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,16 +38,15 @@
             </nav>
         </header>
     </div>
-    <div class="loader">
+    <div class="loader" id="loader">
         <div class="glitch" data-glitch="Loading...">Loading...</div>
       </div> 
     <script src="script.js"></script>
     <script>
         window.addEventListener('load', function () {
-            var loader = document.querySelector('.loader');
             var containerMain = document.querySelector('.conteiner-main');
-            loader.style.display = 'none'; // Ocultar el loader
             containerMain.style.opacity = '1'; // Mostrar el contenido al cargar completamente la página
+            document.getElementById("loader").classList.toggle("loading");
         });
     </script>
 </body>

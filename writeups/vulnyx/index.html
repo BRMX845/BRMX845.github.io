@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,14 +32,29 @@
         </div>
     </div>
     <div class="htb">
-        <nav class="nav-der">
-            <ul>
-                <li><a href="machines/Flash.html">Flash</a></li>
-                <li>
-                    <p>Resolución de máquinas de la plataforma de Vulnyx </p>
-                </li>
-            </ul>
-        </nav>
+        <div class="writeups">
+            <nav class="nav-der">
+                <div class="nav-der-text">
+                    <ul>
+                        <li><a href="machines/Flash.html">Flash</a></li>
+                        <li>
+                            <p>Resolución de máquinas de la plataforma de Vulnyx </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-der-img">
+                    <img class="imagen4" src="../img/vulnyx.png">
+                </div>
+            </nav>
+        </div>
+        <div class="loader" id="loader">
+            <div data-glitch="Loading..." class="glitch">Loading...</div>
+         </div>
+          <script>
+            window.addEventListener("load", function(){
+              document.getElementById("loader").classList.toggle("loading");
+            })
+          </script>
         <script src="../../script.js"></script>
     </div>
 </body>

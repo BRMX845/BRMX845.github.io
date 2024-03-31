@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flash</title>
     <link rel="stylesheet" href="../../pagesmach.css">
+    <link rel="icon" href="../../img/vulnyx.ico" type="image/x-icon">
 </head>
 <body>
     <div class="contenedor">
@@ -88,6 +89,14 @@
             <p>Ese programa tenia una vulnerabilidad sacada de <a href="https://gtfobins.github.io">GTFOBins</a> la explotamos y ya somos root</p>
         </div>
     </div>
+    <div class="loader" id="loader">
+      <div data-glitch="Loading..." class="glitch">Loading...</div>
+   </div>
+    <script>
+      window.addEventListener("load", function(){
+        document.getElementById("loader").classList.toggle("loading");
+      })
+    </script>
 </body>
 </html>
 

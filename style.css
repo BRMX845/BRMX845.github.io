@@ -172,8 +172,14 @@ hr {
     justify-content: center;
     align-items: center;
     position: fixed;
-    z-index: 10000;
-    transition: 0.3s;
+    top: 0;
+    left: 0;
+    z-index: 10000000;
+    clip-path: circle(150% at 100% 0%);
+    transition: clip-path 0.9s ease-in-out;
+}
+.loading{
+  clip-path: circle(0% at 100% 0%);
 }
   .glitch {
     position: relative;
