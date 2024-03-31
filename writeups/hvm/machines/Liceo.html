@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash</title>
+    <link rel="stylesheet" href="../../pagesmach.css">
+    <link rel="icon" href="../../img/hackmyvm.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Liceo</h1>
+        <div class="text-img">
+            <img src="img/Liceo/liceo.jpg" alt="" class="img-principal">
+            <p class="text">Esta maquina presenta lo siguiente:</p>
+            <img src="img/Liceo/1.png" alt="" class="img-sec">
+            <p>Se ve los siguientes puertos abiertos:
+                <br>
+                21,22,80
+                <br>
+                Por lo que nos ponemos a verificar si alguno de estos tiene vulnerabilidades      </p>
+            <img src="img/Liceo/2.png" alt="" class="img-sec">
+            <p>Se observa que el puerto 21 tiene un archivo por vista anonima</p>
+            <img src="img/Liceo/3.png" alt="" class="img-sec">
+            <p>Lo descargamos y podemos leerlo sin embargo nos da la pista de que hay algo en la pagina</p>
+            <img src="img/Liceo/4.png" alt="" class="img-sec">
+            <p>La pagina tiene el siguiente contenido</p>
+            <img src="img/Liceo/5.png" alt="" class="img-sec">
+            <p>Asi que realizamos un escaneo de directorios añadiendo para .php y tenemos los uploads</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>gobuster dir -u http://IP/ -w "Diccionario para escaneo de directorios" -x .php</span></pre>
+                </div>
+              </div>
+            <p>El contenido del uploads.php es el siguiente.</p>
+            <img src="img/Liceo/6.png" alt="" class="img-sec">
+            <p>Sera mejor usar Burpsuite para capturar el envio e intentamos enviar un archivo php para una reverse shell.</p>
+            <img src="img/Liceo/7.png" alt="" class="img-sec">
+            <p>Observamos que no se pudo subir el archivo asi que podemos usar un tipo de extencion diferente Ejemplo: .phtml</p>
+            <img src="img/Liceo/8.png" alt="">
+            <p>Y la respuesta es:</p>
+            <img src="img/Liceo/9.png" alt="" class="img-sec">
+            <p>Y ahora si se subio por lo que usa un filtrado por extenciones <br> Pero ya se subio por lo que ya podemos hacer el reverse shell</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>nc -lnpv 443</span></pre>
+                </div>
+              </div>
+              <p>Tomar en cuenta que tiene que estar a la escucha en el puerto que configuro su reverse shell</p>
+            <p>Metodo 1:</p>
+            <img src="img/Liceo/10.png" alt="" class="img-sec">
+            <p>Se hace la solicitud a desde el navegador</p>
+            <p>Metodo 2:</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>curl http://IP/uploads/nombre.phtml</span></pre>
+                </div>
+              </div>
+            <p>Se hace la solicitud por curl y de esta manera con ctrl+z lo dejamos ejecutando en segundo plano</p>
+            <img src="img/Liceo/11.png" alt="" class="img-sec">
+            <p>Ya estamos con el usuario www-data pero mejoramos la TTY</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>SHELL=/bin/bash script -q /dev/null</span></pre>
+                </div>
+              </div>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>export TERM=xterm</span></pre>
+                </div>
+              </div>
+            <p>Usamos ctrl+z para que la reverse shell se siga ejecutando</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>stty raw -echo;fg</span></pre>
+                </div>
+              </div>
+            <p>Con esto ya podemos realizar comandos</p>
+            <img src="img/Liceo/13.png" alt="" class="img-sec">
+            <p>Una vez dentro lo que buscamos es la escala de privilegios y usamos find para buscar que podemos ejecutar como root</p>
+            <img src="img/Liceo/14.png" alt="" class="img-sec">
+            <p>Vimos que podemos ejecutar un bash por lo que usamos bash -p para ser root</p>
+            <p>Si tiene dificultades para encontrar las flags estan en los respectivos directorios de usuario y root</p>
+    <div class="loader" id="loader">
+      <div data-glitch="Loading..." class="glitch">Loading...</div>
+   </div>
+    <script>
+      window.addEventListener("load", function(){
+        document.getElementById("loader").classList.toggle("loading");
+      })
+    </script>
+</body>
+</html>
