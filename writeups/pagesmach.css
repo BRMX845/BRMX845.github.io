@@ -13,6 +13,7 @@ body{
 }
 .contenedor{
     margin-top: 20px;
+    margin-bottom: 20px;
     width: 60%;
     overflow-y: auto;
     background-color: #8B95A5;
@@ -23,6 +24,7 @@ body{
 }
 .text-img{
     margin-top: 20px;
+    margin-bottom: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -42,19 +44,80 @@ h1{
     font-size: 60px;
     margin-top: 20px;
 }
-p{
+.text-img p{
+    width: 80%;
     margin-top: 10px;
     margin-bottom: 10px;
     font-family: Inconsolata;
     color: #ffffff;
     font-size: 25px;
 }
+.text-img p a{
+    width: 80%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: Inconsolata;
+    color: #ffffff;
+    font-size: 25px;
+}
+/* cards */
+.card {
+    width: 80%;
+    height: 100px;
+    margin: 0 auto;
+    background-color: #011522;
+    border-radius: 8px;
+    z-index: 1;
+    margin-bottom: 10px;
+    overflow: auto;
+   }
+   
+   .tools {
+    display: flex;
+    align-items: center;
+    padding: 9px;
+   }
+   
+   .circle {
+    padding: 0 4px;
+   }
+   
+   .box {
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    padding: 1px;
+    border-radius: 50%;
+   }
+   
+   .red {
+    background-color: #ff605c;
+   }
+   
+   .yellow {
+    background-color: #ffbd44;
+   }
+   
+   .green {
+    background-color: #00ca4e;
+   }
+   .card__content{
+     color: #ffffff;
+     padding: 10px;
+     font-size: 17px;
+   }
+   
+
 .img-sec{
-    width: 700px;
+    width: 80%;
 }
 @media screen and (max-width: 768px) {
     .contenedor{
         width: 80%;
+    }
+    h1{
+        font-size: 40px;
     }
     .img-principal{
         width: 370px;
@@ -62,8 +125,13 @@ p{
     .img-sec{
         width: 360px;
     }
-    p{
+    .text-img p{
+        font-size: 18px;
+        width: 80%;
         margin-left: 10px;
         margin-right: 10px;
+    }
+    .text-img img{
+        width: 80%;
     }
 }
