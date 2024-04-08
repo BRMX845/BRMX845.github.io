@@ -351,5 +351,8 @@ hr {
     .imagen2{
         margin-top: 35px;
     }
+    .htb{
+      padding-left: 0;
+    }
 
 }

